@@ -22,6 +22,7 @@
 		9694196728585A65008AE5CA /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9694196628585A65008AE5CA /* BasicViewController.swift */; };
 		9694196A28585B64008AE5CA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9694196928585B64008AE5CA /* Then */; };
 		9694196D28585BC4008AE5CA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9694196C28585BC4008AE5CA /* SnapKit */; };
+		96941970285860EB008AE5CA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9694196F285860EB008AE5CA /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 				969419642858599D008AE5CA /* RxSwift in Frameworks */,
 				969419622858599D008AE5CA /* RxRelay in Frameworks */,
 				969419602858599D008AE5CA /* RxCocoa in Frameworks */,
+				96941970285860EB008AE5CA /* Alamofire in Frameworks */,
 				9694196A28585B64008AE5CA /* Then in Frameworks */,
 				9694196D28585BC4008AE5CA /* SnapKit in Frameworks */,
 			);
@@ -202,6 +204,7 @@
 				969419632858599D008AE5CA /* RxSwift */,
 				9694196928585B64008AE5CA /* Then */,
 				9694196C28585BC4008AE5CA /* SnapKit */,
+				9694196F285860EB008AE5CA /* Alamofire */,
 			);
 			productName = SearchedMovie;
 			productReference = 9694192528585869008AE5CA /* SearchedMovie.app */;
@@ -279,6 +282,7 @@
 				9694195E2858599D008AE5CA /* XCRemoteSwiftPackageReference "RxSwift" */,
 				9694196828585B64008AE5CA /* XCRemoteSwiftPackageReference "Then" */,
 				9694196B28585BC4008AE5CA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 9694192628585869008AE5CA /* Products */;
 			projectDirPath = "";
@@ -516,7 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.com.YoujinMack.PetsIntroduction.SearchedMovie;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.com.YoujinMack.SearchedMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -544,7 +548,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.com.YoujinMack.PetsIntroduction.SearchedMovie;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.com.YoujinMack.SearchedMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -694,6 +698,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -721,6 +733,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9694196B28585BC4008AE5CA /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		9694196F285860EB008AE5CA /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
