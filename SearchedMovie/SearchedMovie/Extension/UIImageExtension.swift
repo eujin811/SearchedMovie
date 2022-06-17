@@ -16,11 +16,15 @@ extension UIImage {
     
     enum SymbolType {
         case starFill
+        /// emptyImage
+        case photo      
         
         var systemName: String {
             switch self {
             case .starFill:
-                return "star.fill"
+                return ViewIdentifier.star
+            case .photo:
+                return ViewIdentifier.photo
             }
         }
     }
