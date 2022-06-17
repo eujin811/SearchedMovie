@@ -6,6 +6,6 @@
 import Foundation
 
 enum Constant {
-//    static let appBundle = AppBundle.self
     static let parsingConstant = ParsingConstant.self
+    static let viewID = ViewIdentifier.self
 }
