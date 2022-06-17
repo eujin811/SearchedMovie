@@ -10,14 +10,17 @@ enum ParsingConstant {
     static let parsingType = "application/json"
     
     // MARK: URL
-    static let searchedMovieURL = "https://openapi.naver.com/v1/search/movie.json" // GET
-    
+    static let searchedMovieURL = "https://openapi.naver.com/v1/search/movie.json"
     
     // MARK: Field
-    static let queryField = "query="
+    static let queryField = "query"
+    static let searchDisplayField = "display"      // 검색 결과 출력 건수를 지정, 기본 10, 최대 100
+    static let searchPositionField = "start"       // 검색 시작 위치 지정, 최대 1000까지
+//    static let genreField = "genre"
     
     static let contentTypeField = "Content-Type"
     static let acceptField = "Accept"
+
     static let naverClientIDField = "X-Naver-Client-Id"
     static let naverClientPWField = "X-Naver-Client-Secret"
     
