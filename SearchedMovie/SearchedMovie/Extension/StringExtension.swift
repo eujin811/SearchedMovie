@@ -7,6 +7,8 @@ import Foundation
 import UIKit
 
 extension String {
+    static let empty = ""
+    
     func toURL() -> URL? {
         guard let url = URL(string: self) else { return nil }
         return url
