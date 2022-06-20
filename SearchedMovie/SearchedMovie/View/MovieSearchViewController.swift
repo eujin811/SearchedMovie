@@ -38,10 +38,11 @@ class MovieSearchViewController: BasicViewController {
     override func setUI() {
         super.setUI()
         
-        setNaviBar()
-        
+
         view.addSubview(customSearchBar)
         view.addSubview(movieTableView)
+        
+        setNaviBar()
     }
     
     override func setConstraints() {
