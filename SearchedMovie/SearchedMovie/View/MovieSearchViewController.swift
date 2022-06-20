@@ -14,12 +14,12 @@ class MovieSearchViewController: BasicViewController {
     
     private let searchedTextRelay = ReplayRelay<String>.create(bufferSize: 1)
     
+    private let customNaviBar = MovieSearchBar()
+    private let customSearchBar = CustomSearchBar()
     private let movieTableView = UITableView().then {
         $0.register(MovieCell.self, forCellReuseIdentifier: MovieCell.id)
         $0.rowHeight = 100
     }
-    
-    private let customSearchBar = CustomSearchBar()
     
     private let padding: CGFloat = 10
 
@@ -32,12 +32,13 @@ class MovieSearchViewController: BasicViewController {
         super.viewDidDisappear(animated)
         viewModel.disappear()
     }
+
+    // MARK: - setUI
     
     override func setUI() {
         super.setUI()
-        title = AppComponent.appTitle
         
-        customSearchBar.inset(padding)
+        setNaviBar()
         
         view.addSubview(customSearchBar)
         view.addSubview(movieTableView)
@@ -46,10 +47,10 @@ class MovieSearchViewController: BasicViewController {
     override func setConstraints() {
         super.setConstraints()
         
-        let searchBarHeight: CGFloat = 40
+        let searchBarHeight: CGFloat = 36
         
         customSearchBar.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(padding)
             $0.leading.trailing.equalToSuperview().inset(padding)
             $0.height.equalTo(searchBarHeight)
         }
@@ -62,7 +63,19 @@ class MovieSearchViewController: BasicViewController {
         
     }
     
+    private func setNaviBar() {
+        guard let navibarHeight = navigationController?.navigationBar.frame.height else { return }
+        
+        customNaviBar.frame.size.height = navibarHeight
+        
+        navigationItem.titleView = customNaviBar
+        customNaviBar.setTitle(AppComponent.appTitle)
+
+        customSearchBar.inset(padding)
+    }
+    
     // MARK: - bind
+    
     override func bind() {
         super.bind()
         let output = viewModel
@@ -97,6 +110,8 @@ class MovieSearchViewController: BasicViewController {
             .disposed(by: disposeBag)
     }
     
+    // MARK: - subscribe
+    
     override func subscribe() {
         movieTableView.rx
             .modelSelected(Movie.self)
@@ -104,13 +119,19 @@ class MovieSearchViewController: BasicViewController {
             .drive(
                 with: self,
                 onNext: { owner, movie in
-                    print("selected", movie)
                     owner.viewModel.showDetailView()
                 }
             )
             .disposed(by: disposeBag)
         
-        // TODO: searchView
+        customNaviBar.didTapButton { [weak self] in
+            self?.viewModel.showFavorite()
+        }
+
+        subscribeSearchBar()
+    }
+    
+    func subscribeSearchBar() {
         let searchBarTextField = customSearchBar.textField
         searchBarTextField.rx.controlEvent([.editingDidEndOnExit])
             .asDriver()
@@ -139,7 +160,6 @@ class MovieSearchViewController: BasicViewController {
         
         customSearchBar.didTapCancelButton {}
         customSearchBar.didTapSearchButton { [weak self] in
-            print("search")
             self?.searchedTextRelay
                 .accept(searchBarTextField.text ?? String.empty)
         }
