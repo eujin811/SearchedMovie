@@ -51,6 +51,7 @@
 		96A55D6B2860CFB200336BBD /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */; };
 		96A55D6F2860ECF100336BBD /* DetailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6E2860ECF100336BBD /* DetailMovie.swift */; };
 		96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A55D712860F4F800336BBD /* WebKit.framework */; };
+		96A55D752860F93900336BBD /* RxWebKit in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D742860F93900336BBD /* RxWebKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A55D752860F93900336BBD /* RxWebKit in Frameworks */,
 				96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */,
 				969419642858599D008AE5CA /* RxSwift in Frameworks */,
 				969419622858599D008AE5CA /* RxRelay in Frameworks */,
@@ -354,6 +356,7 @@
 				9694196928585B64008AE5CA /* Then */,
 				9694196C28585BC4008AE5CA /* SnapKit */,
 				9694196F285860EB008AE5CA /* Alamofire */,
+				96A55D742860F93900336BBD /* RxWebKit */,
 			);
 			productName = SearchedMovie;
 			productReference = 9694192528585869008AE5CA /* SearchedMovie.app */;
@@ -432,6 +435,7 @@
 				9694196828585B64008AE5CA /* XCRemoteSwiftPackageReference "Then" */,
 				9694196B28585BC4008AE5CA /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */,
 			);
 			productRefGroup = 9694192628585869008AE5CA /* Products */;
 			projectDirPath = "";
@@ -882,6 +886,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxWebKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -914,6 +926,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		96A55D742860F93900336BBD /* RxWebKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */;
+			productName = RxWebKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
