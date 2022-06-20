@@ -46,6 +46,7 @@
 		96A55D6028606C7800336BBD /* HTMLTagType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D5F28606C7800336BBD /* HTMLTagType.swift */; };
 		96A55D632860A36C00336BBD /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D622860A36C00336BBD /* CustomView.swift */; };
 		96A55D652860AF9000336BBD /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D642860AF9000336BBD /* CustomSearchBar.swift */; };
+		96A55D672860B9AB00336BBD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D662860B9AB00336BBD /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		96A55D5F28606C7800336BBD /* HTMLTagType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTagType.swift; sourceTree = "<group>"; };
 		96A55D622860A36C00336BBD /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		96A55D642860AF9000336BBD /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		96A55D662860B9AB00336BBD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 		9694195B285858C6008AE5CA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				96A55D662860B9AB00336BBD /* ViewModel.swift */,
 				96486545285B493000570F75 /* MovieSearchViewModel.swift */,
 			);
 			path = ViewModel;
@@ -458,6 +461,7 @@
 				96486552285B6C4700570F75 /* FontComponent.swift in Sources */,
 				96486544285B48AB00570F75 /* AppComponent.swift in Sources */,
 				9648653E285B2B2C00570F75 /* OldMovieSearchAPI.swift in Sources */,
+				96A55D672860B9AB00336BBD /* ViewModel.swift in Sources */,
 				9694196728585A65008AE5CA /* BasicViewController.swift in Sources */,
 				9694192B28585869008AE5CA /* SceneDelegate.swift in Sources */,
 				96A55D6028606C7800336BBD /* HTMLTagType.swift in Sources */,
