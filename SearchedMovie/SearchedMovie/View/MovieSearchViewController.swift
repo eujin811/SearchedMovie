@@ -78,14 +78,16 @@ class MovieSearchViewController: BasicViewController {
     
     override func bind() {
         super.bind()
-        let output = viewModel
+        let vmOutput = viewModel
             .transform(input: .init(searchedTextRelay: self.searchedTextRelay))
         
-        bindTableView(subject: output.moviesSubject)
+        bindTableView(subject: vmOutput.moviesSubject)
     }
     
     private func bindTableView(subject: PublishSubject<[Movie]>) {
-        subject.bind(to: movieTableView.rx
+        subject
+            .subscribe(on: MainScheduler.instance)
+            .bind(to: movieTableView.rx
             .items(
                 cellIdentifier: MovieCell.id,
                 cellType: MovieCell.self
@@ -119,13 +121,15 @@ class MovieSearchViewController: BasicViewController {
             .drive(
                 with: self,
                 onNext: { owner, movie in
-                    owner.viewModel.showDetailView()
+                    DetailMovie.shared.movie = movie
+                    owner.showDetail()
                 }
             )
             .disposed(by: disposeBag)
         
         customNaviBar.didTapButton { [weak self] in
-            self?.viewModel.showFavorite()
+//            self?.viewModel.showFavorite()
+            print("즐찾 보여줭")
         }
 
         subscribeSearchBar()
