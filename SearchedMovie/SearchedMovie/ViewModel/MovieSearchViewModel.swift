@@ -46,11 +46,6 @@ class MovieSearchViewModel: ViewModelType  {
             .disposed(by: disposeBag)
     }
     
-    /// TODO
-    func showDetailView() {
-        
-    }
-    
     // MARK: - private
     
     private func searchMovies(_ searchText: String) {
