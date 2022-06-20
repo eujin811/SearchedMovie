@@ -14,12 +14,14 @@ class MovieDetailViewModel: ViewModelType {
     }
     
     struct Output {
-        let movieRelay: PublishRelay<Movie>
+        let movieRelay: ReplayRelay<Movie>
+        let isFavoriteRelay: ReplayRelay<Bool>
     }
     
     var disposeBag = DisposeBag()
     
-    private let movieRelay = PublishRelay<Movie>()
+    private let movieRelay = ReplayRelay<Movie>.create(bufferSize: 1)
+    private let isFavorite = ReplayRelay<Bool>.create(bufferSize: 1)
 
     func transform(input: Input) -> Output {
         input.isFavoriteRelay
@@ -33,12 +35,15 @@ class MovieDetailViewModel: ViewModelType {
         
         movieRelay.accept(DetailMovie.shared.movie)
         
+        checkFavorite()
         print("detail!!!", DetailMovie.shared.movie)
         
-        return Output(movieRelay: movieRelay)
+        return Output(movieRelay: movieRelay, isFavoriteRelay: isFavorite)
     }
     
-    func loadWebView() {
-        
+    // TODO
+    func checkFavorite() {
+        isFavorite.accept(true)
     }
+    
 }
