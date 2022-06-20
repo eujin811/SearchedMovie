@@ -9,15 +9,23 @@ import UIKit
 import SnapKit
 
 class DetailViewHeader: CustomView {
-    private let posterImageView = UIImageView()
+    private let posterImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+    }
     private let starButton = UIButton().then {
         $0.setImage(UIImage.setIcon(.starFill), for: .normal)
         $0.tintColor = .lightGray
     }
 
-    private let directorLabel = UILabel()
-    private let actorsLabel = UILabel()
-    private let ratingLabel = UILabel()
+    private let directorLabel = UILabel().then {
+        $0.font = UIFont.font(to: .headerViewLabel)
+    }
+    private let actorsLabel = UILabel().then {
+        $0.font = UIFont.font(to: .headerViewLabel)
+    }
+    private let ratingLabel = UILabel().then {
+        $0.font = UIFont.font(to: .headerViewLabel)
+    }
 
     private let margin: CGFloat = 10
     
@@ -28,10 +36,11 @@ class DetailViewHeader: CustomView {
     
     override func setUI() {
         super.setUI()
+        self.backgroundColor = .white
         
         self.addSubview(posterImageView)
-        
         self.addSubview(starButton)
+        
         self.addSubview(directorLabel)
         self.addSubview(actorsLabel)
         self.addSubview(ratingLabel)
@@ -57,23 +66,27 @@ class DetailViewHeader: CustomView {
         directorLabel.snp.makeConstraints {
             $0.top.equalTo(posterImageView)
             $0.leading.equalTo(posterImageView.snp.trailing).offset(margin)
+            $0.trailing.equalTo(starButton.snp.leading).inset(margin)
         }
         
         actorsLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(directorLabel)
+            $0.trailing.equalTo(directorLabel)
         }
         
         ratingLabel.snp.makeConstraints {
             $0.bottom.equalTo(posterImageView)
             $0.leading.equalTo(directorLabel)
+            $0.trailing.equalTo(directorLabel)
         }
     }
     
     // MARK: - action
     
     func configure(movie: Movie, isFavorite: Bool) {
-        posterImageView.image = movie.imageURL?.toImage()
+        let emptyImage = UIImage.setIcon(.photo)
+        posterImageView.image = movie.imageURL?.toImage() ?? emptyImage
         
         let director = movie.director?.removeText(Constant.view.orMark) ?? String.empty
         directorLabel.text = Constant.view.directorMark + director
