@@ -24,7 +24,7 @@ extension String {
     }
     
     func removeText(_ text: String) -> String {
-        return self.replacingOccurrences(of: text, with: String.empty)
+        return self.replacingOccurrences(of: text, with: " ")
     }
     
     func removeTag(_ tagType: HTMLTagType) -> String {

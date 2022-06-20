@@ -106,7 +106,7 @@ class MovieCell: UITableViewCell {
         // contents
         self.titleLabel.text = title.removeTag(.bTag)
         self.directorLabel.text = Constant.view.directorMark + director.removeText(Constant.view.orMark)
-        self.actorLabel.text = Constant.view.actorsMark + actor
+        self.actorLabel.text = Constant.view.actorsMark + actor.removeText(Constant.view.orMark)
         self.userRatingLabel.text = Constant.view.ratingMark + userRating
         
         // image
