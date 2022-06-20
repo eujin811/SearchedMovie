@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol ViewModelType {
     /// View -> VM
