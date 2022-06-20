@@ -17,7 +17,9 @@ extension UIImage {
     enum SymbolType {
         case starFill
         /// emptyImage
-        case photo      
+        case photo
+        case search
+        case xCircle
         
         var systemName: String {
             switch self {
@@ -25,6 +27,10 @@ extension UIImage {
                 return ViewIdentifier.star
             case .photo:
                 return ViewIdentifier.photo
+            case .search:
+                return ViewIdentifier.search
+            case .xCircle:
+                return ViewIdentifier.xCircle
             }
         }
     }

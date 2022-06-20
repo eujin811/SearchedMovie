@@ -12,4 +12,6 @@ enum ViewIdentifier {
     // MARK: AssetID
     static let star = "star.fill"
     static let photo = "photo"
+    static let search = "magnifyingglass.circle.fill"
+    static let xCircle = "x.circle.fill"
 }
