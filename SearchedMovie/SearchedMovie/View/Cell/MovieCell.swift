@@ -10,12 +10,22 @@ import UIKit
 import SnapKit
 
 class MovieCell: UITableViewCell {
-    let id = Constant.viewID.moviewCellID
+    static let id = Constant.viewID.moviewCellID
     
-    private let posterImageView = UIImageView()
+    private let posterImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+    }
     private let starButton = UIButton().then {
         $0.setImage(UIImage.setIcon(.starFill), for: .normal)
-  
+    }
+    
+    private let contentStackView = UIStackView().then {
+        let margin: CGFloat = 10
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.alignment = .fill
+        $0.layoutMargins.left = margin
+        $0.layoutMargins.right = margin
     }
     
     private let titleLabel = UILabel().then {
@@ -50,44 +60,37 @@ class MovieCell: UITableViewCell {
         
         contentView.addSubview(posterImageView)
         contentView.addSubview(starButton)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(directorLabel)
-        contentView.addSubview(actorLabel)
-        contentView.addSubview(userRatingLabel)
+        contentView.addSubview(contentStackView)
+        
+        contentStackView.addArrangedSubview(titleLabel)
+        contentStackView.addArrangedSubview(directorLabel)
+        contentStackView.addArrangedSubview(actorLabel)
+        contentStackView.addArrangedSubview(userRatingLabel)
     }
     
     private func setConstraints() {
         let margin: CGFloat = 10
         
-        let imageWidth: CGFloat = 80
+        let imageWidth: CGFloat = 60
         let starSize: CGFloat = 30
         
         posterImageView.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
+            $0.top.leading.bottom.equalToSuperview().inset(margin)
             $0.width.equalTo(imageWidth)
         }
         
         starButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(margin)
+            $0.top.equalTo(margin)
+            $0.trailing.equalToSuperview().inset(margin)
             $0.width.height.equalTo(starSize)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(posterImageView)
-            $0.leading.equalTo(posterImageView.snp.trailing)
+        contentStackView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(margin)
+            $0.leading.equalTo(posterImageView.snp.trailing).offset(margin)
+            $0.trailing.equalTo(starButton.snp.leading).inset(margin)
         }
-        directorLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
-            $0.leading.equalTo(titleLabel)
-        }
-        actorLabel.snp.makeConstraints {
-            $0.top.equalTo(directorLabel.snp.bottom)
-            $0.leading.equalTo(titleLabel)
-        }
-        userRatingLabel.snp.makeConstraints {
-            $0.top.equalTo(actorLabel.snp.bottom)
-            $0.leading.equalTo(titleLabel)
-        }
+        
     }
     
     // MARK: - Function
@@ -97,13 +100,14 @@ class MovieCell: UITableViewCell {
         isFavorite: Bool,
         title: String,
         director: String,
-        action: String,
+        actor: String,
         userRating: String
     ) {
-        self.titleLabel.text = title
-        self.directorLabel.text = director
-        self.actorLabel.text = action
-        self.userRatingLabel.text = userRating
+        // contents
+        self.titleLabel.text = title.removeTag(.bTag)
+        self.directorLabel.text = Constant.view.directorMark + director.removeText(Constant.view.orMark)
+        self.actorLabel.text = Constant.view.actorsMark + actor
+        self.userRatingLabel.text = Constant.view.ratingMark + userRating
         
         // image
         let emptyImage = UIImage.setIcon(.photo)
@@ -118,23 +122,30 @@ class MovieCell: UITableViewCell {
         let addAction = UIAction { [weak self] _ in
             action()
             
-            self?.isFavorite.toggle()
-            self?.setFavorite()
+            self?.toggleFavorite()
         }
         
         starButton.addAction(addAction, for: .touchUpInside)
     }
     
+    func changeStarFlag(isFavorite: Bool, completion: @escaping() -> Void) {
+        self.isFavorite = isFavorite
+        self.setFavorite(isFavorite)
+        completion()
+    }
+    
     // MARK: - private
     
-    private func setFavorite(_ isFavorite: Bool? = nil) {
-        let isChecked = isFavorite ?? self.isFavorite
-        let color = isChecked ? selectedColor : unselectedColor
-        starButton
-            .setImage(
-                UIImage.setIcon(.starFill)?.withTintColor(color),
-                for: .normal
-            )
+    private func toggleFavorite() {
+        isFavorite.toggle()
+        setFavorite(isFavorite)
+    }
+    
+    private func setFavorite(_ isFavorite: Bool) {
+        let color = isFavorite ? selectedColor : unselectedColor
+        
+        starButton.setImage(UIImage.setIcon(.starFill), for: .normal)
+        starButton.tintColor = color
     }
     
 }
