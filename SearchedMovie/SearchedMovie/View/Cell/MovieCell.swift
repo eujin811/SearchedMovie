@@ -45,6 +45,8 @@ class MovieCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUI()
         setConstraints()
+        
+        self.selectionStyle = .none
     }
     
     private let selectedColor = UIColor.yellow
