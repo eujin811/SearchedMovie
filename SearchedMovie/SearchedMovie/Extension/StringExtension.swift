@@ -22,4 +22,16 @@ extension String {
         
         return image
     }
+    
+    func removeText(_ text: String) -> String {
+        return self.replacingOccurrences(of: text, with: String.empty)
+    }
+    
+    func removeTag(_ tagType: HTMLTagType) -> String {
+        let (firstTag, secondeTag) = tagType.tags
+        
+        return self
+            .replacingOccurrences(of: firstTag, with: String.empty)
+            .replacingOccurrences(of: secondeTag, with: String.empty)
+    }
 }
