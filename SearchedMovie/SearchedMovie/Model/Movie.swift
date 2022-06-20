@@ -20,9 +20,10 @@ struct Movie: Codable {
     let userRating: String?
     
     private enum CodingKeys: String, CodingKey {
-        case title, link, pubDate, director, actors, userRating
+        case title, link, pubDate, director, userRating
         case subTitle = "subtitle"
         case imageURL = "image"
+        case actors = "actor"
     }
 }
 
