@@ -16,6 +16,9 @@ class BasicViewController: UIViewController {
         
         setUI()
         setConstraints()
+        
+        bind()
+        subscribe()
     }
     
     func setUI() {
@@ -23,6 +26,14 @@ class BasicViewController: UIViewController {
     }
     
     func setConstraints() {
+        
+    }
+    
+    func bind() {
+        
+    }
+    
+    func subscribe() {
         
     }
     
