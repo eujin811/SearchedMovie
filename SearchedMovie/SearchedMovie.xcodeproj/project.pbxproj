@@ -52,6 +52,7 @@
 		96A55D6F2860ECF100336BBD /* DetailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6E2860ECF100336BBD /* DetailMovie.swift */; };
 		96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A55D712860F4F800336BBD /* WebKit.framework */; };
 		96A55D752860F93900336BBD /* RxWebKit in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D742860F93900336BBD /* RxWebKit */; };
+		96A55D772861089C00336BBD /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D762861089C00336BBD /* DetailViewHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		96A55D6E2860ECF100336BBD /* DetailMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovie.swift; sourceTree = "<group>"; };
 		96A55D712860F4F800336BBD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		96A55D762861089C00336BBD /* DetailViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +323,7 @@
 				96A55D622860A36C00336BBD /* CustomView.swift */,
 				96A55D642860AF9000336BBD /* CustomSearchBar.swift */,
 				96A55D682860CA6D00336BBD /* MovieSearchBar.swift */,
+				96A55D762861089C00336BBD /* DetailViewHeader.swift */,
 			);
 			path = CustomizeView;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				969419722859C606008AE5CA /* Movie.swift in Sources */,
 				96486546285B493000570F75 /* MovieSearchViewModel.swift in Sources */,
 				964865382859F2CE00570F75 /* URLExtension.swift in Sources */,
+				96A55D772861089C00336BBD /* DetailViewHeader.swift in Sources */,
 				964865352859E59F00570F75 /* SMError.swift in Sources */,
 				969419752859C77D008AE5CA /* Constant.swift in Sources */,
 				9648653C2859F9F300570F75 /* MovieSearchAPI.swift in Sources */,
