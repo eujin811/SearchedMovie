@@ -49,6 +49,7 @@
 		96A55D672860B9AB00336BBD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D662860B9AB00336BBD /* ViewModel.swift */; };
 		96A55D692860CA6D00336BBD /* MovieSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D682860CA6D00336BBD /* MovieSearchBar.swift */; };
 		96A55D6B2860CFB200336BBD /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */; };
+		96A55D6F2860ECF100336BBD /* DetailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6E2860ECF100336BBD /* DetailMovie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		96A55D642860AF9000336BBD /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		96A55D662860B9AB00336BBD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		96A55D682860CA6D00336BBD /* MovieSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchBar.swift; sourceTree = "<group>"; };
+		96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		96A55D6E2860ECF100336BBD /* DetailMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +277,7 @@
 			children = (
 				96A55D662860B9AB00336BBD /* ViewModel.swift */,
 				96486545285B493000570F75 /* MovieSearchViewModel.swift */,
+				96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				964865302859CCC900570F75 /* ParsingConstant.swift in Sources */,
 				96A55D652860AF9000336BBD /* CustomSearchBar.swift in Sources */,
 				96486542285B456E00570F75 /* MovieFavoriteViewController.swift in Sources */,
+				96A55D6B2860CFB200336BBD /* MovieDetailViewModel.swift in Sources */,
 				96A55D692860CA6D00336BBD /* MovieSearchBar.swift in Sources */,
 				9648653A2859F44200570F75 /* StringExtension.swift in Sources */,
 				969419772859C7F7008AE5CA /* AppBundle.swift in Sources */,

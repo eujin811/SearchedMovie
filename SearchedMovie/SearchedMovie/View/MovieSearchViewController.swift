@@ -169,4 +169,11 @@ class MovieSearchViewController: BasicViewController {
         }
     }
     
+    // MARK: - action
+    
+    private func showDetail() {
+        let detailVC = MovieDetailViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
 }
