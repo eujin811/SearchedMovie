@@ -20,6 +20,8 @@ extension UIImage {
         case photo
         case search
         case xCircle
+        case chevronLeft
+        case xmark
         
         var systemName: String {
             switch self {
@@ -31,6 +33,10 @@ extension UIImage {
                 return ViewIdentifier.search
             case .xCircle:
                 return ViewIdentifier.xCircle
+            case .chevronLeft:
+                return ViewIdentifier.chevronLeft
+            case .xmark:
+                return ViewIdentifier.xmark
             }
         }
     }

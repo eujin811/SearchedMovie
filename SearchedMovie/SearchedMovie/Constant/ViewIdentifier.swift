@@ -14,4 +14,6 @@ enum ViewIdentifier {
     static let photo = "photo"
     static let search = "magnifyingglass.circle.fill"
     static let xCircle = "x.circle.fill"
+    static let chevronLeft = "chevron.left"
+    static let xmark = "xmark"
 }
