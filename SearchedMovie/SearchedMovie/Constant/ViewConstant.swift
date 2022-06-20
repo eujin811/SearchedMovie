@@ -9,6 +9,8 @@ import Foundation
 enum ViewConstant {
     static let orMark = "|"
     
+    static let favorite = "즐겨찾기"
+    
     // MARK: - cell
     
     static let directorMark = "감독: "
