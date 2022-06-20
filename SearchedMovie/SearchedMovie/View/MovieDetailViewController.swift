@@ -13,6 +13,13 @@ import SnapKit
 class MovieDetailViewController: BasicViewController {
     private let viewModel = MovieDetailViewModel()
     
+    private let backButton = UIButton(type: .system).then {
+        $0.setImage(UIImage.setIcon(.chevronLeft), for: .normal)
+        $0.tintColor = .darkGray
+        $0.frame = .init(x: 0, y: 0, width: 15, height: 15)
+    }
+    private let backButtonItem = UIBarButtonItem()
+    
     private let contentsStackView = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .equalSpacing
@@ -33,9 +40,12 @@ class MovieDetailViewController: BasicViewController {
     
     override func setUI() {
         super.setUI()
-//        navigationItem.backButtonTitle = ""
-//        navigationItem.backBarButtonItem?.tintColor = .gray
         
+        backButtonItem.customView = backButton
+        backButton.addTarget(self, action: #selector(popVC(_:)), for: .touchUpInside)
+        
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = backButtonItem
         
         view.addSubview(contentsStackView)
         
@@ -88,6 +98,10 @@ class MovieDetailViewController: BasicViewController {
         
         headerView.configure(movie: movie, isFavorite: isFavorite)
         print("configure", movie.title)
+//        loadWebView(url: movie.link?.toURL())
     }
     
+    @objc private func popVC(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
 }
