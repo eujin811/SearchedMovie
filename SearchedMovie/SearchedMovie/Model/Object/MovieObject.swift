@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class MovieObject: Object {
-    @objc dynamic var id: String = String.empty
+    @objc dynamic var id: Int = -1
     
     @objc dynamic var title: String = String.empty
     @objc dynamic var subtitle: String = String.empty
@@ -31,9 +31,6 @@ class MovieObject: Object {
     }
     
     func configure(movie: Movie) {
-        self.id = UUID().uuidString
-        print("movie Objc: ", movie, self.id)
-
         self.title = movie.title ?? String.empty
         self.subtitle = movie.subTitle ?? String.empty
         self.linkStr = movie.link ?? String.empty
