@@ -56,6 +56,7 @@
 		96A55D7A28614CF600336BBD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D7928614CF600336BBD /* RealmSwift */; };
 		96A55D7F28614DB600336BBD /* MovieObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D7E28614DB600336BBD /* MovieObject.swift */; };
 		96A55D8128614DFC00336BBD /* DatabaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8028614DFC00336BBD /* DatabaseConstant.swift */; };
+		96A55D8528617EC900336BBD /* EmptyFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		96A55D762861089C00336BBD /* DetailViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewHeader.swift; sourceTree = "<group>"; };
 		96A55D7E28614DB600336BBD /* MovieObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieObject.swift; sourceTree = "<group>"; };
 		96A55D8028614DFC00336BBD /* DatabaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConstant.swift; sourceTree = "<group>"; };
+		96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavoriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +334,7 @@
 				96A55D642860AF9000336BBD /* CustomSearchBar.swift */,
 				96A55D682860CA6D00336BBD /* MovieSearchBar.swift */,
 				96A55D762861089C00336BBD /* DetailViewHeader.swift */,
+				96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */,
 			);
 			path = CustomizeView;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				9694195D285858DF008AE5CA /* MovieSearchViewController.swift in Sources */,
 				96486550285B6AD700570F75 /* FontExtension.swift in Sources */,
 				969419722859C606008AE5CA /* Movie.swift in Sources */,
+				96A55D8528617EC900336BBD /* EmptyFavoriteView.swift in Sources */,
 				96486546285B493000570F75 /* MovieSearchViewModel.swift in Sources */,
 				964865382859F2CE00570F75 /* URLExtension.swift in Sources */,
 				96A55D772861089C00336BBD /* DetailViewHeader.swift in Sources */,
