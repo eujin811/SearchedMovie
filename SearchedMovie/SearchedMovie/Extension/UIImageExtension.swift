@@ -16,6 +16,7 @@ extension UIImage {
     
     enum SymbolType {
         case starFill
+        case starSlash
         /// emptyImage
         case photo
         case search
@@ -27,6 +28,8 @@ extension UIImage {
             switch self {
             case .starFill:
                 return ViewIdentifier.star
+            case .starSlash:
+                return ViewIdentifier.starSlash
             case .photo:
                 return ViewIdentifier.photo
             case .search:
