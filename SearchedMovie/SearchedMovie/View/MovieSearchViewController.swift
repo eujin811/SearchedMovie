@@ -29,30 +29,38 @@ class MovieSearchViewController: BasicViewController {
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        viewModel.disappear()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
     }
-
+    
     // MARK: - setUI
     
     override func setUI() {
         super.setUI()
         
+        customNaviBar.setTitle(AppComponent.appTitle)
 
         view.addSubview(customSearchBar)
         view.addSubview(movieTableView)
         
-        setNaviBar()
+        view.addSubview(customNaviBar)
     }
     
     override func setConstraints() {
         super.setConstraints()
         
         let searchBarHeight: CGFloat = 36
+        let navibarHeight: CGFloat = 60
+        
+        customNaviBar.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(navibarHeight)
+        }
         
         customSearchBar.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(padding)
+            $0.top.equalTo(customNaviBar.snp.bottom).offset(padding)
             $0.leading.trailing.equalToSuperview().inset(padding)
             $0.height.equalTo(searchBarHeight)
         }
@@ -64,18 +72,7 @@ class MovieSearchViewController: BasicViewController {
         }
         
     }
-    
-    private func setNaviBar() {
-        guard let navibarHeight = navigationController?.navigationBar.frame.height else { return }
-        
-        customNaviBar.frame.size.height = navibarHeight
-        
-        navigationItem.titleView = customNaviBar
-        customNaviBar.setTitle(AppComponent.appTitle)
-
-        customSearchBar.inset(padding)
-    }
-    
+   
     // MARK: - bind
     
     override func bind() {
@@ -140,6 +137,7 @@ class MovieSearchViewController: BasicViewController {
     
     func subscribeSearchBar() {
         let searchBarTextField = customSearchBar.textField
+        
         searchBarTextField.rx.controlEvent([.editingDidEndOnExit])
             .asDriver()
             .drive(

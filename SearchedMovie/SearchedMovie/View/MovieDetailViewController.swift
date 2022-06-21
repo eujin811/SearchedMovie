@@ -41,7 +41,7 @@ class MovieDetailViewController: BasicViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func setUI() {

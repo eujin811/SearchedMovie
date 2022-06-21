@@ -64,7 +64,7 @@ class DetailViewHeader: CustomView {
         }
         
         directorLabel.snp.makeConstraints {
-            $0.top.equalTo(posterImageView)
+            $0.top.equalTo(posterImageView).inset(margin)
             $0.leading.equalTo(posterImageView.snp.trailing).offset(margin)
             $0.trailing.equalTo(starButton.snp.leading).inset(margin)
         }
@@ -76,7 +76,7 @@ class DetailViewHeader: CustomView {
         }
         
         ratingLabel.snp.makeConstraints {
-            $0.bottom.equalTo(posterImageView)
+            $0.bottom.equalTo(posterImageView).inset(margin)
             $0.leading.equalTo(directorLabel)
             $0.trailing.equalTo(directorLabel)
         }
