@@ -84,7 +84,7 @@ class DetailViewHeader: CustomView {
     
     // MARK: - action
     
-    func configure(movie: Movie, isFavorite: Bool) {
+    func configure(movie: Movie) {
         let emptyImage = UIImage.setIcon(.photo)
         posterImageView.image = movie.imageURL?.toImage() ?? emptyImage
         
@@ -96,7 +96,9 @@ class DetailViewHeader: CustomView {
         
         let rating = movie.userRating ?? String.empty
         ratingLabel.text = Constant.view.ratingMark + rating
-        
+    }
+    
+    func setIsFavorite(_ isFavorite: Bool) {
         self.isFavorite = isFavorite
         setFavorite(isFavorite)
     }
@@ -104,8 +106,7 @@ class DetailViewHeader: CustomView {
     func didTapStarButton(_ action: @escaping() -> Void) {
         let addAction = UIAction { [weak self] _ in
             action()
-            
-            self?.toggleFavorite()
+//            self?.toggleFavorite()
         }
         
         starButton.addAction(addAction, for: .touchUpInside)
