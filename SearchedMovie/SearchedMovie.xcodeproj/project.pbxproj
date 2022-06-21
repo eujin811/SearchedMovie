@@ -57,6 +57,7 @@
 		96A55D7C28614D3100336BBD /* FavoriteMovieRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D7B28614D3100336BBD /* FavoriteMovieRequestHelper.swift */; };
 		96A55D7F28614DB600336BBD /* MovieObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D7E28614DB600336BBD /* MovieObject.swift */; };
 		96A55D8128614DFC00336BBD /* DatabaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8028614DFC00336BBD /* DatabaseConstant.swift */; };
+		96A55D8328616BED00336BBD /* MovieFavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8228616BEC00336BBD /* MovieFavoriteViewModel.swift */; };
 		96A55D8528617EC900336BBD /* EmptyFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,7 @@
 		96A55D7B28614D3100336BBD /* FavoriteMovieRequestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieRequestHelper.swift; sourceTree = "<group>"; };
 		96A55D7E28614DB600336BBD /* MovieObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieObject.swift; sourceTree = "<group>"; };
 		96A55D8028614DFC00336BBD /* DatabaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConstant.swift; sourceTree = "<group>"; };
+		96A55D8228616BEC00336BBD /* MovieFavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFavoriteViewModel.swift; sourceTree = "<group>"; };
 		96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavoriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,6 +300,7 @@
 				96A55D662860B9AB00336BBD /* ViewModel.swift */,
 				96486545285B493000570F75 /* MovieSearchViewModel.swift */,
 				96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */,
+				96A55D8228616BEC00336BBD /* MovieFavoriteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				9694192928585869008AE5CA /* AppDelegate.swift in Sources */,
 				9648654E285B626000570F75 /* ViewIdentifier.swift in Sources */,
 				96486554285C3F3400570F75 /* UIImageExtension.swift in Sources */,
+				96A55D8328616BED00336BBD /* MovieFavoriteViewModel.swift in Sources */,
 				96486552285B6C4700570F75 /* FontComponent.swift in Sources */,
 				96486544285B48AB00570F75 /* AppComponent.swift in Sources */,
 				9648653E285B2B2C00570F75 /* OldMovieSearchAPI.swift in Sources */,
