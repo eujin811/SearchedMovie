@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class MovieSearchBar: CustomView {
-    private let titleView = UITextView().then {
+    private let titleLabel = UILabel().then {
         $0.backgroundColor = .clear
         $0.font = UIFont.font(to: .barTitle)
     }
@@ -36,24 +36,26 @@ class MovieSearchBar: CustomView {
         self.frame.size.width = screenSize.width
         
         self.addSubview(shadow)
-        self.addSubview(titleView)
+        self.addSubview(titleLabel)
         self.addSubview(favoriteButton)
     }
     
     func setTitle(_ title: String) {
-        titleView.text = title
+        titleLabel.text = title
         
         contentsConstraint()
     }
     
     private func contentsConstraint() {
         let margin: CGFloat = 10
+        let titleLabelPadding: CGFloat = 20
+        
         let buttonHeight: CGFloat = 24
         let buttonWidth: CGFloat = 76
         
-        titleView.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview()
-            $0.leading.equalToSuperview().inset(margin)
+            $0.leading.equalToSuperview().offset(titleLabelPadding)
         }
         
         shadow.snp.makeConstraints {
