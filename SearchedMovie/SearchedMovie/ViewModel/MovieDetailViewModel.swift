@@ -10,40 +10,53 @@ import RxCocoa
 
 class MovieDetailViewModel: ViewModelType {
     struct Input {
-        let isFavoriteRelay: PublishRelay<Bool>
+        let isFavoriteRelay: ReplayRelay<Bool>
     }
     
     struct Output {
         let movieRelay: ReplayRelay<Movie>
-        let isFavoriteRelay: ReplayRelay<Bool>
     }
     
+    private let request = FavoriteMovieRequestHelper()
     var disposeBag = DisposeBag()
     
     private let movieRelay = ReplayRelay<Movie>.create(bufferSize: 1)
-    private let isFavorite = ReplayRelay<Bool>.create(bufferSize: 1)
 
     func transform(input: Input) -> Output {
+        let isFavorite = isFavoriate(movie: DetailMovie.shared.movie)
+        
+        input.isFavoriteRelay.accept(isFavorite)
         input.isFavoriteRelay
             .subscribe(
                 with: self,
                 onNext: { owner, isFavorite in
-                    print("isFavorite")
+                    if isFavorite {
+                        owner.registerMovie(movie: DetailMovie.shared.movie)
+                    } else {
+                        owner.deleteMovie(movie: DetailMovie.shared.movie)
+                    }
                 }
             )
             .disposed(by: disposeBag)
         
         movieRelay.accept(DetailMovie.shared.movie)
         
-        checkFavorite()
-        print("detail!!!", DetailMovie.shared.movie)
+//        print("detail!!!", DetailMovie.shared.movie)
         
-        return Output(movieRelay: movieRelay, isFavoriteRelay: isFavorite)
+        return Output(movieRelay: movieRelay)
     }
     
-    // TODO
-    func checkFavorite() {
-        isFavorite.accept(true)
+    func isFavoriate(movie: Movie) -> Bool {
+        guard let title = movie.title else { return false }
+        let (owneMovie) = request.readMovie(title: title)
+        return owneMovie != nil
     }
     
+    func registerMovie(movie: Movie) {
+        request.createMovie(movie)
+    }
+    
+    func deleteMovie(movie: Movie) {
+        request.deleteMovie(movie: movie)
+    }
 }

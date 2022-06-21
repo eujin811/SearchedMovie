@@ -31,7 +31,8 @@ class MovieDetailViewController: BasicViewController {
     private let headerView = DetailViewHeader()
     let webView = WKWebView()
     
-    private let isFavoriteRelay = PublishRelay<Bool>()
+    private let isFavoriteRelay = ReplayRelay<Bool>.create(bufferSize: 1)
+    private var isFavorite = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,29 +76,36 @@ class MovieDetailViewController: BasicViewController {
         let vmOutput = viewModel
             .transform(input: .init(isFavoriteRelay: isFavoriteRelay))
         
-        Observable.combineLatest(
-            vmOutput.movieRelay,
-            vmOutput.isFavoriteRelay)
-        .bind(with: self) { owner, data in
-            let (movie, isFavorite) = data
-            owner.configure(movie: movie, isFavorite: isFavorite)
-        }
-        .disposed(by: disposeBag)
+        isFavoriteRelay
+            .subscribe(with: self) { owner, isFavorite in
+                owner.isFavorite = isFavorite
+                owner.headerView.setIsFavorite(isFavorite)
+            }
+            .disposed(by: disposeBag)
+        
+        vmOutput.movieRelay
+            .bind(with: self) { owner, movie in
+                owner.configure(movie: movie)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func subscribe() {
         super.subscribe()
         
-        headerView.didTapStarButton {
-            print("tap star")
+        headerView.didTapStarButton { [weak self] in
+            self?.favoriteToggle()
         }
     }
     
-    private func configure(movie: Movie, isFavorite: Bool) {
+    private func favoriteToggle() {
+        isFavoriteRelay.accept(!isFavorite)
+    }
+    
+    private func configure(movie: Movie) {
         title = movie.title?.removeTag(.bTag)
         
-        headerView.configure(movie: movie, isFavorite: isFavorite)
-        print("configure", movie.title)
+        headerView.configure(movie: movie)
 //        loadWebView(url: movie.link?.toURL())
     }
     
