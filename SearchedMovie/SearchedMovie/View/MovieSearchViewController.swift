@@ -13,6 +13,7 @@ class MovieSearchViewController: BasicViewController {
     let viewModel = MovieSearchViewModel()
     
     private let searchedTextRelay = ReplayRelay<String>.create(bufferSize: 1)
+    private let selectedItemRelay = ReplayRelay<Movie>.create(bufferSize: 1)
     
     private let customNaviBar = MovieSearchBar()
     private let customSearchBar = CustomSearchBar()
@@ -80,7 +81,9 @@ class MovieSearchViewController: BasicViewController {
     override func bind() {
         super.bind()
         let vmOutput = viewModel
-            .transform(input: .init(searchedTextRelay: self.searchedTextRelay))
+            .transform(input: .init(
+                searchedTextRelay: self.searchedTextRelay,
+                selectedItemRelay: self.selectedItemRelay))
         
         bindTableView(subject: vmOutput.moviesSubject)
     }
@@ -92,22 +95,22 @@ class MovieSearchViewController: BasicViewController {
             .items(
                 cellIdentifier: MovieCell.id,
                 cellType: MovieCell.self
-            )) { index, movie, cell in
-                // TODO: isFavorite check
-                let testFavorite = false    // data binding 할때 체크해서 넣어줄까?? Model 따로 만들어서?? 아니면 그냥 여기서 체크할까..
+            )) { [weak self] index, movie, cell in
+                guard let self = self else { return }
+                
+                let isFavoriate = self.viewModel.isFavoriate(movie: movie)
                 
                 cell.configure(
                     imageURL: movie.imageURL?.toURL(),
-                    isFavorite: testFavorite,
+                    isFavorite: isFavoriate,
                     title: movie.title ?? String.empty,
                     director: movie.director ?? String.empty,
                     actor: movie.actors ?? String.empty,
                     userRating: movie.userRating ?? String.empty
                 )
-
-                cell.didTapStarButton {
-                    // MARK: completion
-                    print("selelct")
+                
+                cell.didTapStarButton { [weak self] in
+                    self?.selectedItemRelay.accept(movie)
                 }
             }
             .disposed(by: disposeBag)

@@ -27,6 +27,8 @@ class MovieFavoriteViewController: BasicViewController {
         $0.isHidden = true
     }
     
+    private let selectedItemRelay = ReplayRelay<Movie>.create(bufferSize: 1)
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -59,7 +61,7 @@ class MovieFavoriteViewController: BasicViewController {
     
     override func bind() {
         super.bind()
-        let vmOutput = viewModel.transform(input: .init())
+        let vmOutput = viewModel.transform(input: .init(selectedItemRelay: selectedItemRelay))
         
         vmOutput.favoriteCountRelay
             .bind(with: self) { owner, count in
@@ -75,22 +77,21 @@ class MovieFavoriteViewController: BasicViewController {
             .items(
                 cellIdentifier: MovieCell.id,
                 cellType: MovieCell.self
-            )) { index, movie, cell in
-                // TODO: isFavorite check
-                let testFavorite = false
+            )) { [weak self] index, movie, cell in
+                guard let self = self else { return }
+                let isFavorite = self.viewModel.isFavoriate(movie: movie)
                 
                 cell.configure(
                     imageURL: movie.imageURL?.toURL(),
-                    isFavorite: testFavorite,
+                    isFavorite: isFavorite,
                     title: movie.title ?? String.empty,
                     director: movie.director ?? String.empty,
                     actor: movie.actors ?? String.empty,
                     userRating: movie.userRating ?? String.empty
                 )
 
-                cell.didTapStarButton {
-                    // MARK: completion
-                    print("selelct")
+                cell.didTapStarButton { [weak self] in
+                    self?.selectedItemRelay.accept(movie)
                 }
             }
             .disposed(by: disposeBag)
