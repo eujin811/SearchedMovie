@@ -13,8 +13,12 @@ struct FavoriteMovieRequestHelper {
     
     let realmFilePath = Realm.Configuration.defaultConfiguration.fileURL
     
-    func create(object: Object) {
+    func createMovie(_ model: Movie) {
+        let object = MovieObject()
+        object.id = makeID()
+        object.configure(movie: model)
         print("create", object)
+
         try! realm.write {
             realm.add(object)
         }
@@ -26,18 +30,46 @@ struct FavoriteMovieRequestHelper {
         return Array(savedMovies)
     }
     
-    func readMovie(id: String) -> MovieObject? {
+    func readMovie(id: Int) -> Movie? {
         let savedMovies = try! realm.objects(MovieObject.self)
         let searchedMovie = savedMovies.filter(Constant.db.primaryID + Constant.db.equalSymbol + "'\(id)'")
+        let object = searchedMovie.first
         
-        return searchedMovie.first
+        return object?.makeModel()
     }
     
-    func readMovie(title: String) -> MovieObject? {
+    func readMovie(title: String) -> Movie? {
         let savedMovies = try! realm.objects(MovieObject.self)
         let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
+        guard let object = searchedMovie.first else { return nil }
+        print("redMovie", object)
         
-        return searchedMovie.first
+        return object.makeModel()
     }
     
+    func deleteMovie(id: Int) {
+        let savedMovies = try! realm.objects(MovieObject.self)
+        print("delete: ", savedMovies[id-1])
+
+        try! realm.write {
+            realm.delete(savedMovies[id-1])
+        }
+    }
+    
+    func deleteMovie(movie: Movie) {
+        guard let title = movie.title else { return }
+        let savedMovies = try! realm.objects(MovieObject.self)
+        let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
+
+        guard let object = searchedMovie.first else { return }
+        print("delete: ", savedMovies[object.id - 1])
+        
+        try! realm.write {
+            realm.delete(savedMovies[object.id - 1])
+        }
+    }
+    
+    func makeID() -> Int {
+        return readMovieList().count + 1
+    }
 }
