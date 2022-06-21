@@ -58,6 +58,7 @@
 		96A55D8128614DFC00336BBD /* DatabaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8028614DFC00336BBD /* DatabaseConstant.swift */; };
 		96A55D8328616BED00336BBD /* MovieFavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8228616BEC00336BBD /* MovieFavoriteViewModel.swift */; };
 		96A55D8528617EC900336BBD /* EmptyFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */; };
+		96A55D872861C30A00336BBD /* MovieDetailViewController+WKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D862861C30A00336BBD /* MovieDetailViewController+WKDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		96A55D8028614DFC00336BBD /* DatabaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConstant.swift; sourceTree = "<group>"; };
 		96A55D8228616BEC00336BBD /* MovieFavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFavoriteViewModel.swift; sourceTree = "<group>"; };
 		96A55D8428617EC900336BBD /* EmptyFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavoriteView.swift; sourceTree = "<group>"; };
+		96A55D862861C30A00336BBD /* MovieDetailViewController+WKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieDetailViewController+WKDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,8 +288,9 @@
 				9648654A285B616000570F75 /* Cell */,
 				9694196528585A53008AE5CA /* Util */,
 				9694195C285858DF008AE5CA /* MovieSearchViewController.swift */,
-				9648653F285B44D000570F75 /* MovieDetailViewController.swift */,
 				96486541285B456E00570F75 /* MovieFavoriteViewController.swift */,
+				9648653F285B44D000570F75 /* MovieDetailViewController.swift */,
+				96A55D862861C30A00336BBD /* MovieDetailViewController+WKDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				9694192B28585869008AE5CA /* SceneDelegate.swift in Sources */,
 				96A55D6028606C7800336BBD /* HTMLTagType.swift in Sources */,
 				96486549285B54CD00570F75 /* IntExtension.swift in Sources */,
+				96A55D872861C30A00336BBD /* MovieDetailViewController+WKDelegate.swift in Sources */,
 				96486540285B44D000570F75 /* MovieDetailViewController.swift in Sources */,
 				9694195D285858DF008AE5CA /* MovieSearchViewController.swift in Sources */,
 				96486550285B6AD700570F75 /* FontExtension.swift in Sources */,

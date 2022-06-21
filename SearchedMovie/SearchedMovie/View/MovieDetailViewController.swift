@@ -24,12 +24,17 @@ class MovieDetailViewController: BasicViewController {
         $0.axis = .vertical
         $0.distribution = .equalSpacing
         $0.alignment = .fill
-        
-        $0.backgroundColor = .lightGray
+    }
+    
+    private let scrollView = UIScrollView().then {
+        $0.alwaysBounceVertical = true
+        $0.backgroundColor = .white
     }
     
     private let headerView = DetailViewHeader()
-    let webView = WKWebView()
+    let webView = WKWebView().then {
+        $0.scrollView.isScrollEnabled = false
+    }
     
     private let isFavoriteRelay = ReplayRelay<Bool>.create(bufferSize: 1)
     private var isFavorite = Bool()
@@ -48,26 +53,40 @@ class MovieDetailViewController: BasicViewController {
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = backButtonItem
         
-        view.addSubview(contentsStackView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentsStackView)
         
-        contentsStackView.addArrangedSubview(headerView)
         contentsStackView.addArrangedSubview(webView)
+        
+        webView.addSubview(headerView)
     }
     
     override func setConstraints() {
         super.setConstraints()
         
+        let screenBound = UIScreen.main.bounds
+        
+        let headerViewHeight: CGFloat = 120
+        let webViewHeight: CGFloat = screenBound.height * 1.35
+        
+        scrollView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+        }
         contentsStackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.width.equalTo(screenBound.width)
+            $0.height.equalTo(webViewHeight)
         }
         
         headerView.snp.makeConstraints {
-            $0.height.equalTo(100)
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(headerViewHeight)
         }
-//        webView.snp.makeConstraints {
-//            $0.top.leading.trailing.bottom.equalToSuperview()//.equalTo(view.safeAreaLayoutGuide)
-//        }
+        
+        webView.snp.makeConstraints {
+            $0.height.equalTo(webViewHeight)
+        }
     }
     
     override func bind() {
@@ -106,7 +125,7 @@ class MovieDetailViewController: BasicViewController {
         title = movie.title?.removeTag(.bTag)
         
         headerView.configure(movie: movie)
-//        loadWebView(url: movie.link?.toURL())
+        loadWebView(url: movie.link?.toURL())
     }
     
     @objc private func popVC(_ sender: UIButton) {
