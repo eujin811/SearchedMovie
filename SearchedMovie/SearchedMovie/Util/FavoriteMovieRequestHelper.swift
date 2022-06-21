@@ -15,8 +15,8 @@ struct FavoriteMovieRequestHelper {
     
     func createMovie(_ model: Movie) {
         let object = MovieObject()
-        object.id = makeID()
         object.configure(movie: model)
+        
         print("create", object)
 
         try! realm.write {
