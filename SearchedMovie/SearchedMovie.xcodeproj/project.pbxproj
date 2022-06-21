@@ -53,6 +53,7 @@
 		96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A55D712860F4F800336BBD /* WebKit.framework */; };
 		96A55D752860F93900336BBD /* RxWebKit in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D742860F93900336BBD /* RxWebKit */; };
 		96A55D772861089C00336BBD /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D762861089C00336BBD /* DetailViewHeader.swift */; };
+		96A55D7A28614CF600336BBD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D7928614CF600336BBD /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 				96A55D752860F93900336BBD /* RxWebKit in Frameworks */,
 				96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */,
 				969419642858599D008AE5CA /* RxSwift in Frameworks */,
+				96A55D7A28614CF600336BBD /* RealmSwift in Frameworks */,
 				969419622858599D008AE5CA /* RxRelay in Frameworks */,
 				969419602858599D008AE5CA /* RxCocoa in Frameworks */,
 				96941970285860EB008AE5CA /* Alamofire in Frameworks */,
@@ -360,6 +362,7 @@
 				9694196C28585BC4008AE5CA /* SnapKit */,
 				9694196F285860EB008AE5CA /* Alamofire */,
 				96A55D742860F93900336BBD /* RxWebKit */,
+				96A55D7928614CF600336BBD /* RealmSwift */,
 			);
 			productName = SearchedMovie;
 			productReference = 9694192528585869008AE5CA /* SearchedMovie.app */;
@@ -439,6 +442,7 @@
 				9694196B28585BC4008AE5CA /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */,
 				96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */,
+				96A55D7828614CF600336BBD /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 9694192628585869008AE5CA /* Products */;
 			projectDirPath = "";
@@ -898,6 +902,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		96A55D7828614CF600336BBD /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -935,6 +947,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */;
 			productName = RxWebKit;
+		};
+		96A55D7928614CF600336BBD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96A55D7828614CF600336BBD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
