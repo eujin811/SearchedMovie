@@ -129,8 +129,7 @@ class MovieSearchViewController: BasicViewController {
             .disposed(by: disposeBag)
         
         customNaviBar.didTapButton { [weak self] in
-//            self?.viewModel.showFavorite()
-            print("즐찾 보여줭")
+            self?.presnetFavorite()
         }
 
         subscribeSearchBar()
@@ -177,4 +176,11 @@ class MovieSearchViewController: BasicViewController {
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
+    private func presnetFavorite() {
+        let favoriteVC = UINavigationController(
+            rootViewController: MovieFavoriteViewController())
+        favoriteVC.modalPresentationStyle = .fullScreen
+        
+        self.present(favoriteVC, animated: true)
+    }
 }
