@@ -47,12 +47,17 @@ struct FavoriteMovieRequestHelper {
         return object.makeModel()
     }
     
-    func deleteMovie(id: Int) {
+    func deleteMovie(id: String) {
         let savedMovies = try! realm.objects(MovieObject.self)
-        print("delete: ", savedMovies[id-1])
-
+        let object = savedMovies
+            .filter { $0.id == id }
+            .first
+        
+        print("delete: ", object)
+        guard let delteObject = object else { return }
+        
         try! realm.write {
-            realm.delete(savedMovies[id-1])
+            realm.delete(delteObject)
         }
     }
     
@@ -62,14 +67,9 @@ struct FavoriteMovieRequestHelper {
         let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
 
         guard let object = searchedMovie.first else { return }
-        print("delete: ", savedMovies[object.id - 1])
         
         try! realm.write {
-            realm.delete(savedMovies[object.id - 1])
+            realm.delete(object)
         }
-    }
-    
-    func makeID() -> Int {
-        return readMovieList().count + 1
     }
 }
