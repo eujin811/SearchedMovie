@@ -44,4 +44,16 @@ class MovieObject: Object {
         self.userRating = movie.userRating ?? String.empty
     }
     
+    func makeModel() -> Movie {
+        return .init(
+            title: self.title,
+            subTitle: self.subtitle,
+            link: self.linkStr,
+            imageURL: self.imageURLStr,
+            pubDate: self.pubDate,
+            director: self.director,
+            actors: self.actors,
+            userRating: self.userRating
+        )
+    }
 }
