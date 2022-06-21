@@ -13,10 +13,11 @@ struct FavoriteMovieRequestHelper {
     
     let realmFilePath = Realm.Configuration.defaultConfiguration.fileURL
     
-    func createMovie(_ model: Movie) {
-        let object = MovieObject()
-        object.configure(movie: model)
+    func createMovie(_ movie: Movie) {
+        guard readMovieObject(title: movie.title) == nil else { return }
         
+        let object = MovieObject()
+        object.configure(movie: movie)
         print("create", object)
 
         try! realm.write {
@@ -39,9 +40,7 @@ struct FavoriteMovieRequestHelper {
     }
     
     func readMovie(title: String) -> Movie? {
-        let savedMovies = try! realm.objects(MovieObject.self)
-        let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
-        guard let object = searchedMovie.first else { return nil }
+        guard let object = readMovieObject(title: title) else { return nil }
         print("redMovie", object)
         
         return object.makeModel()
@@ -52,24 +51,30 @@ struct FavoriteMovieRequestHelper {
         let object = savedMovies
             .filter { $0.id == id }
             .first
-        
-        print("delete: ", object)
         guard let delteObject = object else { return }
         
+        print("delete: ", object)
         try! realm.write {
             realm.delete(delteObject)
         }
     }
     
     func deleteMovie(movie: Movie) {
-        guard let title = movie.title else { return }
-        let savedMovies = try! realm.objects(MovieObject.self)
-        let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
-
-        guard let object = searchedMovie.first else { return }
+        guard let object = readMovieObject(title: movie.title) else { return }
+        print("delete: ", object)
         
         try! realm.write {
             realm.delete(object)
         }
     }
+    
+    private func readMovieObject(title: String?) -> MovieObject? {
+        guard let title = title else { return nil }
+        let savedMovies = try! realm.objects(MovieObject.self)
+        let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
+        let owneObject = searchedMovie.first
+        
+        return owneObject
+    }
+    
 }
