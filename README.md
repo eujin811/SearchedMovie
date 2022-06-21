@@ -15,6 +15,9 @@
 - Realm
 
 ## MVVM
+
+<img src="https://user-images.githubusercontent.com/53036267/174771768-8a9167e7-4150-464c-8773-1963af7db106.pn", width="500">
+
 ![folderList](https://user-images.githubusercontent.com/53036267/174771768-8a9167e7-4150-464c-8773-1963af7db106.png)
 
 ## 화면
