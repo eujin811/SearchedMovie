@@ -51,7 +51,6 @@
 		96A55D6B2860CFB200336BBD /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6A2860CFB200336BBD /* MovieDetailViewModel.swift */; };
 		96A55D6F2860ECF100336BBD /* DetailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D6E2860ECF100336BBD /* DetailMovie.swift */; };
 		96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A55D712860F4F800336BBD /* WebKit.framework */; };
-		96A55D752860F93900336BBD /* RxWebKit in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D742860F93900336BBD /* RxWebKit */; };
 		96A55D772861089C00336BBD /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D762861089C00336BBD /* DetailViewHeader.swift */; };
 		96A55D7A28614CF600336BBD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 96A55D7928614CF600336BBD /* RealmSwift */; };
 		96A55D7C28614D3100336BBD /* FavoriteMovieRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A55D7B28614D3100336BBD /* FavoriteMovieRequestHelper.swift */; };
@@ -134,7 +133,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96A55D752860F93900336BBD /* RxWebKit in Frameworks */,
 				96A55D722860F4F800336BBD /* WebKit.framework in Frameworks */,
 				969419642858599D008AE5CA /* RxSwift in Frameworks */,
 				96A55D7A28614CF600336BBD /* RealmSwift in Frameworks */,
@@ -384,7 +382,6 @@
 				9694196928585B64008AE5CA /* Then */,
 				9694196C28585BC4008AE5CA /* SnapKit */,
 				9694196F285860EB008AE5CA /* Alamofire */,
-				96A55D742860F93900336BBD /* RxWebKit */,
 				96A55D7928614CF600336BBD /* RealmSwift */,
 			);
 			productName = SearchedMovie;
@@ -464,7 +461,6 @@
 				9694196828585B64008AE5CA /* XCRemoteSwiftPackageReference "Then" */,
 				9694196B28585BC4008AE5CA /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */,
-				96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */,
 				96A55D7828614CF600336BBD /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 9694192628585869008AE5CA /* Products */;
@@ -922,14 +918,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxWebKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		96A55D7828614CF600336BBD /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -970,11 +958,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9694196E285860EB008AE5CA /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		96A55D742860F93900336BBD /* RxWebKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 96A55D732860F93900336BBD /* XCRemoteSwiftPackageReference "RxWebKit" */;
-			productName = RxWebKit;
 		};
 		96A55D7928614CF600336BBD /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "rxwebkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/RxSwiftCommunity/RxWebKit",
-      "state" : {
-        "revision" : "4f70b83a63e4dfc59ec1d3fd632788eb31069134",
-        "version" : "2.0.1"
-      }
-    },
-    {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SnapKit/SnapKit",
