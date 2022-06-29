@@ -53,11 +53,10 @@ class MovieSearchAPI {
         
     }
 
-    /*
-     MovieSearchAPI().request(type: .movies("여름"))
-     MovieSearchAPI().request(type: .moreMovies("바다", 15))
-     MovieSearchAPI().request(type: .positionMovies("바다", 15, 10))
-     */
+    
+     /// - MovieSearchAPI().request(type: .movies("여름"))
+     /// - MovieSearchAPI().request(type: .moreMovies("바다", 15))
+     /// - MovieSearchAPI().request(type: .positionMovies("바다", 15, 10))
     enum SearchType {
         case movies(String)     // 기본 10개 display
         ///  searchText, displayCount

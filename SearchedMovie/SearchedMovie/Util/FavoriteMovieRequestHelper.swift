@@ -41,7 +41,7 @@ struct FavoriteMovieRequestHelper {
     
     func readMovie(title: String) -> Movie? {
         guard let object = readMovieObject(title: title) else { return nil }
-        print("redMovie", object)
+        print("readMovie", object)
         
         return object.makeModel()
     }

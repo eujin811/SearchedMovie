@@ -79,11 +79,10 @@ class MovieFavoriteViewController: BasicViewController {
                 cellType: MovieCell.self
             )) { [weak self] index, movie, cell in
                 guard let self = self else { return }
-                let isFavorite = self.viewModel.isFavoriate(movie: movie)
                 
                 cell.configure(
                     imageURL: movie.imageURL?.toURL(),
-                    isFavorite: isFavorite,
+                    isFavorite: true,
                     title: movie.title ?? String.empty,
                     director: movie.director ?? String.empty,
                     actor: movie.actors ?? String.empty,

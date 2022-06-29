@@ -130,12 +130,6 @@ class MovieCell: UITableViewCell {
         starButton.addAction(addAction, for: .touchUpInside)
     }
     
-    func changeStarFlag(isFavorite: Bool, completion: @escaping() -> Void) {
-        self.isFavorite = isFavorite
-        self.setFavorite(isFavorite)
-        completion()
-    }
-    
     // MARK: - private
     
     private func toggleFavorite() {
