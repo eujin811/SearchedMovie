@@ -11,6 +11,8 @@ import RxRelay
 import UIKit
 
 class MovieFavoriteViewModel: ViewModelType {
+    private let favoriteRequest = FavoriteMovieRequestHelper()
+    var disposeBag = DisposeBag()
     
     struct Input {
         let selectedItemRelay: ReplayRelay<Movie>
@@ -23,9 +25,6 @@ class MovieFavoriteViewModel: ViewModelType {
     
     private let favoritesRelay = ReplayRelay<[Movie]>.create(bufferSize: 1)
     private let favoriteCountRelay = ReplayRelay<Int>.create(bufferSize: 1)
-    
-    private let favoriteRequest = FavoriteMovieRequestHelper()
-    var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
         input.selectedItemRelay

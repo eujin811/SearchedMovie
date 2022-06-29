@@ -10,10 +10,12 @@ import RxCocoa
 
 class MovieSearchViewModel: ViewModelType  {
     private let api = MovieSearchAPI()
-    
+    private let request = FavoriteMovieRequestHelper()
+    var disposeBag = DisposeBag()
+
     struct Input {
         let searchedTextRelay: ReplayRelay<String>
-        let selectedItemRelay: ReplayRelay<Movie>
+        let favoriateSelectedItemRelay: ReplayRelay<Movie>
     }
     
     struct Output {
@@ -21,13 +23,9 @@ class MovieSearchViewModel: ViewModelType  {
     }
     
     private let moviesSubject = PublishSubject<[Movie]>()
-    
-    private let request = FavoriteMovieRequestHelper()
 
-    var disposeBag = DisposeBag()
-    
     func transform(input: Input) -> Output {
-        input.selectedItemRelay
+        input.favoriateSelectedItemRelay
             .subscribe(with: self
             ) { owner, item in
                 owner.checkedFavorite(movie: item)

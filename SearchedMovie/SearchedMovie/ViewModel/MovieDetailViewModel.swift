@@ -9,6 +9,9 @@ import RxSwift
 import RxCocoa
 
 class MovieDetailViewModel: ViewModelType {
+    private let request = FavoriteMovieRequestHelper()
+    var disposeBag = DisposeBag()
+    
     struct Input {
         let isFavoriteRelay: ReplayRelay<Bool>
     }
@@ -16,9 +19,6 @@ class MovieDetailViewModel: ViewModelType {
     struct Output {
         let movieRelay: ReplayRelay<Movie>
     }
-    
-    private let request = FavoriteMovieRequestHelper()
-    var disposeBag = DisposeBag()
     
     private let movieRelay = ReplayRelay<Movie>.create(bufferSize: 1)
 

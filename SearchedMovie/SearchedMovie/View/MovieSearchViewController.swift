@@ -13,7 +13,7 @@ class MovieSearchViewController: BasicViewController {
     let viewModel = MovieSearchViewModel()
     
     private let searchedTextRelay = ReplayRelay<String>.create(bufferSize: 1)
-    private let selectedItemRelay = ReplayRelay<Movie>.create(bufferSize: 1)
+    private let favoriateSelectedItemRelay = ReplayRelay<Movie>.create(bufferSize: 1)
     
     private let customNaviBar = MovieSearchBar()
     private let customSearchBar = CustomSearchBar()
@@ -80,7 +80,7 @@ class MovieSearchViewController: BasicViewController {
         let vmOutput = viewModel
             .transform(input: .init(
                 searchedTextRelay: self.searchedTextRelay,
-                selectedItemRelay: self.selectedItemRelay))
+                favoriateSelectedItemRelay: self.favoriateSelectedItemRelay))
         
         bindTableView(subject: vmOutput.moviesSubject)
     }
@@ -107,7 +107,7 @@ class MovieSearchViewController: BasicViewController {
                     )
                     
                     cell.didTapStarButton { [weak self] in
-                        self?.selectedItemRelay.accept(movie)
+                        self?.favoriateSelectedItemRelay.accept(movie)
                     }
                 }
                 .disposed(by: disposeBag)
