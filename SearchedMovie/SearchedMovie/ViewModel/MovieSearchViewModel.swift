@@ -26,10 +26,6 @@ class MovieSearchViewModel: ViewModelType  {
 
     var disposeBag = DisposeBag()
     
-    private let movieItemsRelay: BehaviorRelay<[Movie]> = BehaviorRelay(value: [])
-    
-    private let searchRelay = PublishRelay<String>()
-    
     func transform(input: Input) -> Output {
         input.selectedItemRelay
             .subscribe(with: self
@@ -46,11 +42,6 @@ class MovieSearchViewModel: ViewModelType  {
             .disposed(by: disposeBag)
                 
         return Output(moviesSubject: moviesSubject)
-    }
-    
-    func disappear() {
-        moviesSubject
-            .disposed(by: disposeBag)
     }
     
     // MARK: - Action
@@ -74,11 +65,12 @@ class MovieSearchViewModel: ViewModelType  {
     private func searchMovies(_ searchText: String) {
         api.request(type: .movies(searchText))
             .subscribe(
-                onSuccess: { [weak self] movies in
-                    self?.moviesSubject.onNext(movies)
+                with: self,
+                onSuccess: { owner, movies in
+                    owner.moviesSubject.onNext(movies)
                 },
-                onFailure: { [weak self] error in
-                    self?.relatedError(error)
+                onFailure: { owner, error in
+                    owner.relatedError(error)
                 }
             )
             .disposed(by: disposeBag)

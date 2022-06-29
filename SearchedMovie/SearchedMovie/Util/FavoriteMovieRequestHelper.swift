@@ -53,7 +53,7 @@ struct FavoriteMovieRequestHelper {
             .first
         guard let delteObject = object else { return }
         
-        print("delete: ", object)
+        print("delete: ", object._rlmObjcValue)
         try! realm.write {
             realm.delete(delteObject)
         }

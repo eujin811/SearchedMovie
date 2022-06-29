@@ -58,12 +58,13 @@ class MovieSearchAPI {
      /// - MovieSearchAPI().request(type: .moreMovies("바다", 15))
      /// - MovieSearchAPI().request(type: .positionMovies("바다", 15, 10))
     enum SearchType {
+        static let displayCount = 10
         case movies(String)     // 기본 10개 display
         ///  searchText, displayCount
         case moreMovies(String, Int)
         /// searchText, startPosition, displayCount
         /// startPosition의 경우 1부터 시작.
-        case positionMovies(String, Int, Int)
+        case positionMovies(String, Int)
         
         var jsonObject: [String : Any] {
             let parseConstant = Constant.parsingConstant
@@ -74,9 +75,9 @@ class MovieSearchAPI {
             case let .moreMovies(searchText, displayCount):
                 return [parseConstant.queryField: searchText,
                         parseConstant.searchDisplayField: displayCount]
-            case let .positionMovies(searchText, startPosition, displayCount):
+            case let .positionMovies(searchText, startPosition):
                 return [parseConstant.queryField: searchText,
-                        parseConstant.searchDisplayField: displayCount,
+                        parseConstant.searchDisplayField: SearchType.displayCount,
                         parseConstant.searchPositionField: startPosition]
             }
         }

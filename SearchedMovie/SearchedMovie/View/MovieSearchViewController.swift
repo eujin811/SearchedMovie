@@ -89,28 +89,28 @@ class MovieSearchViewController: BasicViewController {
         subject
             .subscribe(on: MainScheduler.instance)
             .bind(to: movieTableView.rx
-            .items(
-                cellIdentifier: MovieCell.id,
-                cellType: MovieCell.self
-            )) { [weak self] index, movie, cell in
-                guard let self = self else { return }
-                
-                let isFavoriate = self.viewModel.isFavoriate(movie: movie)
-                
-                cell.configure(
-                    imageURL: movie.imageURL?.toURL(),
-                    isFavorite: isFavoriate,
-                    title: movie.title ?? String.empty,
-                    director: movie.director ?? String.empty,
-                    actor: movie.actors ?? String.empty,
-                    userRating: movie.userRating ?? String.empty
-                )
-                
-                cell.didTapStarButton { [weak self] in
-                    self?.selectedItemRelay.accept(movie)
+                .items(
+                    cellIdentifier: MovieCell.id,
+                    cellType: MovieCell.self
+                )) { [weak self] index, movie, cell in
+                    guard let self = self else { return }
+                    
+                    let isFavoriate = self.viewModel.isFavoriate(movie: movie)
+                    
+                    cell.configure(
+                        imageURL: movie.imageURL?.toURL(),
+                        isFavorite: isFavoriate,
+                        title: movie.title ?? String.empty,
+                        director: movie.director ?? String.empty,
+                        actor: movie.actors ?? String.empty,
+                        userRating: movie.userRating ?? String.empty
+                    )
+                    
+                    cell.didTapStarButton { [weak self] in
+                        self?.selectedItemRelay.accept(movie)
+                    }
                 }
-            }
-            .disposed(by: disposeBag)
+                .disposed(by: disposeBag)
     }
     
     // MARK: - subscribe
@@ -119,13 +119,11 @@ class MovieSearchViewController: BasicViewController {
         movieTableView.rx
             .modelSelected(Movie.self)
             .asDriver()
-            .drive(
-                with: self,
-                onNext: { owner, movie in
-                    DetailMovie.shared.movie = movie
-                    owner.showDetail()
-                }
-            )
+            .drive(with: self
+            ) { owner, movie in
+                DetailMovie.shared.movie = movie
+                owner.showDetail()
+            }
             .disposed(by: disposeBag)
         
         customNaviBar.didTapButton { [weak self] in
@@ -140,27 +138,23 @@ class MovieSearchViewController: BasicViewController {
         
         searchBarTextField.rx.controlEvent([.editingDidEndOnExit])
             .asDriver()
-            .drive(
-                with: self,
-                onNext: { owner, searchText in
-                    owner.searchedTextRelay
-                        .accept(searchBarTextField.text ?? String.empty)
-                    owner.customSearchBar.showCancelButton()
-                }
-            )
+            .drive(with: self
+            ) { owner, searchText in
+                owner.searchedTextRelay
+                    .accept(searchBarTextField.text ?? String.empty)
+                owner.customSearchBar.showCancelButton()
+            }
             .disposed(by: disposeBag)
         
         searchBarTextField.rx.controlEvent([.editingChanged])
             .asDriver()
-            .drive(
-                with: self,
-                onNext: { owner, _ in
-                    let searchText = searchBarTextField.text
-                    if searchText == String.empty {
-                        owner.customSearchBar.showSearchButton()
-                    }
+            .drive(with: self
+            ) { owner, _ in
+                let searchText = searchBarTextField.text
+                if searchText == String.empty {
+                    owner.customSearchBar.showSearchButton()
                 }
-            )
+            }
             .disposed(by: disposeBag)
         
         customSearchBar.didTapCancelButton {}

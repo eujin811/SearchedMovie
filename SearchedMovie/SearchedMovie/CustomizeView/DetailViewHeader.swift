@@ -104,9 +104,8 @@ class DetailViewHeader: CustomView {
     }
     
     func didTapStarButton(_ action: @escaping() -> Void) {
-        let addAction = UIAction { [weak self] _ in
+        let addAction = UIAction { _ in
             action()
-//            self?.toggleFavorite()
         }
         
         starButton.addAction(addAction, for: .touchUpInside)

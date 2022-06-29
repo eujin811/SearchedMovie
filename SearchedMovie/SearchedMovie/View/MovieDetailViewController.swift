@@ -96,14 +96,16 @@ class MovieDetailViewController: BasicViewController {
             .transform(input: .init(isFavoriteRelay: isFavoriteRelay))
         
         isFavoriteRelay
-            .subscribe(with: self) { owner, isFavorite in
+            .subscribe(with: self
+            ) { owner, isFavorite in
                 owner.isFavorite = isFavorite
                 owner.headerView.setIsFavorite(isFavorite)
             }
             .disposed(by: disposeBag)
         
         vmOutput.movieRelay
-            .bind(with: self) { owner, movie in
+            .bind(with: self
+            ) { owner, movie in
                 owner.configure(movie: movie)
             }
             .disposed(by: disposeBag)

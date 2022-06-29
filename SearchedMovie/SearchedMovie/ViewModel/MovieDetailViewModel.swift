@@ -41,8 +41,6 @@ class MovieDetailViewModel: ViewModelType {
         
         movieRelay.accept(DetailMovie.shared.movie)
         
-//        print("detail!!!", DetailMovie.shared.movie)
-        
         return Output(movieRelay: movieRelay)
     }
     

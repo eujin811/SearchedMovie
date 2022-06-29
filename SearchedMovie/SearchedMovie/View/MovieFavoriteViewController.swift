@@ -102,13 +102,11 @@ class MovieFavoriteViewController: BasicViewController {
         movieTableView.rx
             .modelSelected(Movie.self)
             .asDriver()
-            .drive(
-                with: self,
-                onNext: { owner, movie in
-                    DetailMovie.shared.movie = movie
-                    owner.showDetail()
-                }
-            )
+            .drive(with: self
+            ) { owner, movie in
+                DetailMovie.shared.movie = movie
+                owner.showDetail()
+            }
             .disposed(by: disposeBag)
     }
     
