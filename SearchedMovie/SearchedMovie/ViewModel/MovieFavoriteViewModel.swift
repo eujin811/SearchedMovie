@@ -54,8 +54,8 @@ class MovieFavoriteViewModel: ViewModelType {
     }
     
     func isFavoriate(movie: Movie) -> Bool {
-        guard let title = movie.title else { return false }
-        let (owneMovie) = favoriteRequest.readMovie(title: title)
+        guard let link = movie.link else { return false }
+        let (owneMovie) = favoriteRequest.readMovie(link: link)
         return owneMovie != nil
     }
     

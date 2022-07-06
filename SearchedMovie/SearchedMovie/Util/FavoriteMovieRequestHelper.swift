@@ -14,7 +14,7 @@ struct FavoriteMovieRequestHelper {
     let realmFilePath = Realm.Configuration.defaultConfiguration.fileURL
     
     func createMovie(_ movie: Movie) {
-        guard readMovieObject(title: movie.title) == nil else { return }
+        guard readMovieObject(link: movie.link) == nil else { return }
         
         let object = MovieObject()
         object.configure(movie: movie)
@@ -39,8 +39,8 @@ struct FavoriteMovieRequestHelper {
         return object?.makeModel()
     }
     
-    func readMovie(title: String) -> Movie? {
-        guard let object = readMovieObject(title: title) else { return nil }
+    func readMovie(link: String) -> Movie? {
+        guard let object = readMovieObject(link: link) else { return nil }
         print("readMovie", object)
         
         return object.makeModel()
@@ -60,7 +60,7 @@ struct FavoriteMovieRequestHelper {
     }
     
     func deleteMovie(movie: Movie) {
-        guard let object = readMovieObject(title: movie.title) else { return }
+        guard let object = readMovieObject(link: movie.link) else { return }
         print("delete: ", object)
         
         try! realm.write {
@@ -68,10 +68,10 @@ struct FavoriteMovieRequestHelper {
         }
     }
     
-    private func readMovieObject(title: String?) -> MovieObject? {
-        guard let title = title else { return nil }
+    private func readMovieObject(link: String?) -> MovieObject? {
+        guard let link = link else { return nil }
         let savedMovies = try! realm.objects(MovieObject.self)
-        let searchedMovie = savedMovies.filter(Constant.db.title + Constant.db.equalSymbol + "'\(title)'")
+        let searchedMovie = savedMovies.filter(Constant.db.link + Constant.db.equalSymbol + "'\(link)'")
         let owneObject = searchedMovie.first
         
         return owneObject
