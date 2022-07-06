@@ -24,11 +24,11 @@ enum ParsingConstant {
     static let naverClientIDField = "X-Naver-Client-Id"
     static let naverClientPWField = "X-Naver-Client-Secret"
     
-    // 출력결과
+    // key
     static let searchResult = "channel"
     static let searchItem = "items"       // 검색결과 개별 아이템
     static let movieTitle = "title"       // 검색어와 일치하는 부분 태그로 감싸져 있음.
-    static let movieLink  = "link"        // 영화 하이퍼텍스트 link
+    static let movieLink  = "link"
     static let movieImage = "image"
     static let movieSubtitle = "subtitle"
     static let moviePubDate = "pubDate"

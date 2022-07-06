@@ -25,5 +25,12 @@ struct Movie: Codable {
         case imageURL = "image"
         case actors = "actor"
     }
+    
+    static func empty() -> Movie {
+        return Movie(title: nil, subTitle: nil,
+                     link: nil, imageURL: nil,
+                     pubDate: nil, director: nil,
+                     actors: nil, userRating: nil)
+    }
 }
 
