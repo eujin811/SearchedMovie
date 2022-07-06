@@ -17,7 +17,7 @@ class MovieSearchAPI {
                 parseConstant.naverClientIDField: AppBundle.naverAPIID,
                 parseConstant.naverClientPWField: AppBundle.naverAPIPW]
     }
-    
+  
     func request(type: SearchType) -> Single<[Movie]> {
         let headers = self.headers
         let baseURL = baseURLStr.toURL()
@@ -40,7 +40,7 @@ class MovieSearchAPI {
             .responseDecodable(of: MovieResults.self) { response in
                 switch response.result {
                 case .success(let result):
-                    print("result", result, result.items.count)
+                    print("result", result)
                     obsever(.success(result.items))
                 case .failure(let error):
                     print("Error: (\(error)), \(error.localizedDescription)")
@@ -53,18 +53,15 @@ class MovieSearchAPI {
         
     }
 
-    
      /// - MovieSearchAPI().request(type: .movies("여름"))
-     /// - MovieSearchAPI().request(type: .moreMovies("바다", 15))
-     /// - MovieSearchAPI().request(type: .positionMovies("바다", 15, 10))
+     /// - MovieSearchAPI().request(type: .addMovies("바다", 15))
     enum SearchType {
         static let displayCount = 10
+        
         case movies(String)     // 기본 10개 display
-        ///  searchText, displayCount
-        case moreMovies(String, Int)
-        /// searchText, startPosition, displayCount
+        /// searchText, startPosition
         /// startPosition의 경우 1부터 시작.
-        case positionMovies(String, Int)
+        case addMovies(String, Int)
         
         var jsonObject: [String : Any] {
             let parseConstant = Constant.parsingConstant
@@ -72,10 +69,7 @@ class MovieSearchAPI {
             switch self {
             case .movies(let searchText):
                 return [parseConstant.queryField: searchText]
-            case let .moreMovies(searchText, displayCount):
-                return [parseConstant.queryField: searchText,
-                        parseConstant.searchDisplayField: displayCount]
-            case let .positionMovies(searchText, startPosition):
+            case let .addMovies(searchText, startPosition):
                 return [parseConstant.queryField: searchText,
                         parseConstant.searchDisplayField: SearchType.displayCount,
                         parseConstant.searchPositionField: startPosition]
