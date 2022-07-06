@@ -63,8 +63,9 @@ class MovieFavoriteViewController: BasicViewController {
         super.bind()
         let vmOutput = viewModel.transform(input: .init(selectedItemRelay: selectedItemRelay))
         
-        vmOutput.favoriteCountRelay
-            .bind(with: self) { owner, count in
+        vmOutput.favoriteDriver
+            .drive(with: self
+            ) { owner, count in
                 
                 let isEmpty = count < 1
                 owner.emptyView.isHidden = !isEmpty

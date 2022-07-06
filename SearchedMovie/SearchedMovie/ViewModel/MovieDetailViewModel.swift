@@ -17,31 +17,29 @@ class MovieDetailViewModel: ViewModelType {
     }
     
     struct Output {
-        let movieRelay: ReplayRelay<Movie>
+        let movieDriver: Driver<Movie>
     }
     
-    private let movieRelay = ReplayRelay<Movie>.create(bufferSize: 1)
-
     func transform(input: Input) -> Output {
-        let isFavorite = isFavoriate(movie: DetailMovie.shared.movie)
+        let movie = DetailMovie.shared.movie
+        let movieRelay = BehaviorRelay(value: movie)
+        
+        let isFavorite = isFavoriate(movie: movie)
         
         input.isFavoriteRelay.accept(isFavorite)
+        
         input.isFavoriteRelay
-            .subscribe(
-                with: self,
-                onNext: { owner, isFavorite in
-                    if isFavorite {
-                        owner.registerMovie(movie: DetailMovie.shared.movie)
-                    } else {
-                        owner.deleteMovie(movie: DetailMovie.shared.movie)
-                    }
+            .subscribe(with: self
+            ) { owner, isFavorite in
+                if isFavorite {
+                    owner.registerMovie(movie: movie)
+                } else {
+                    owner.deleteMovie(movie: movie)
                 }
-            )
+            }
             .disposed(by: disposeBag)
         
-        movieRelay.accept(DetailMovie.shared.movie)
-        
-        return Output(movieRelay: movieRelay)
+        return Output(movieDriver: movieRelay.asDriver(onErrorJustReturn: Movie.empty()))
     }
     
     func isFavoriate(movie: Movie) -> Bool {

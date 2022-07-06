@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 import UIKit
+import RxCocoa
 
 class MovieFavoriteViewModel: ViewModelType {
     private let favoriteRequest = FavoriteMovieRequestHelper()
@@ -20,11 +21,11 @@ class MovieFavoriteViewModel: ViewModelType {
     
     struct Output {
         let favoritesRelay: ReplayRelay<[Movie]>
-        let favoriteCountRelay: ReplayRelay<Int>
+        let favoriteDriver: Driver<Int>
     }
     
     private let favoritesRelay = ReplayRelay<[Movie]>.create(bufferSize: 1)
-    private let favoriteCountRelay = ReplayRelay<Int>.create(bufferSize: 1)
+    private let favoriteCountSubject = ReplaySubject<Int>.create(bufferSize: 1)
     
     func transform(input: Input) -> Output {
         input.selectedItemRelay
@@ -36,7 +37,10 @@ class MovieFavoriteViewModel: ViewModelType {
         
         request()
         
-        return Output(favoritesRelay: favoritesRelay, favoriteCountRelay: favoriteCountRelay)
+        return Output(
+            favoritesRelay: favoritesRelay,
+            favoriteDriver: favoriteCountSubject.asDriver(onErrorJustReturn: 0)
+        )
     }
     
     // MARK: - Action
@@ -48,8 +52,7 @@ class MovieFavoriteViewModel: ViewModelType {
                 return objc.makeModel()
             }
         
-        favoriteCountRelay.accept(movieResult.count)
-        
+        favoriteCountSubject.onNext(movieResult.count)
         favoritesRelay.accept(movieResult)
     }
     

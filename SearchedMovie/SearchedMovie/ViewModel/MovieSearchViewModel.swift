@@ -19,12 +19,13 @@ class MovieSearchViewModel: ViewModelType  {
     }
     
     struct Output {
-        let moviesSubject: PublishSubject<[Movie]>
+        let moviesRelay: BehaviorRelay<[Movie]>
     }
     
-    private let moviesSubject = PublishSubject<[Movie]>()
+    private let moviesRelay = BehaviorRelay(value: [Movie]())
 
     func transform(input: Input) -> Output {
+
         input.favoriateSelectedItemRelay
             .subscribe(with: self
             ) { owner, item in
@@ -38,8 +39,8 @@ class MovieSearchViewModel: ViewModelType  {
                 owner.searchMovies(searchText)
             }
             .disposed(by: disposeBag)
-                
-        return Output(moviesSubject: moviesSubject)
+        
+        return Output(moviesRelay: moviesRelay)
     }
     
     // MARK: - Action
@@ -65,7 +66,7 @@ class MovieSearchViewModel: ViewModelType  {
             .subscribe(
                 with: self,
                 onSuccess: { owner, movies in
-                    owner.moviesSubject.onNext(movies)
+                    owner.moviesRelay.accept(movies)
                 },
                 onFailure: { owner, error in
                     owner.relatedError(error)

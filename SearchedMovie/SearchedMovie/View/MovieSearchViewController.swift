@@ -82,12 +82,11 @@ class MovieSearchViewController: BasicViewController {
                 searchedTextRelay: self.searchedTextRelay,
                 favoriateSelectedItemRelay: self.favoriateSelectedItemRelay))
         
-        bindTableView(subject: vmOutput.moviesSubject)
+        bindTableView(vmOutput.moviesRelay)
     }
     
-    private func bindTableView(subject: PublishSubject<[Movie]>) {
-        subject
-            .subscribe(on: MainScheduler.instance)
+    private func bindTableView(_ moviesRelay: BehaviorRelay<[Movie]>) {
+        moviesRelay
             .bind(to: movieTableView.rx
                 .items(
                     cellIdentifier: MovieCell.id,
