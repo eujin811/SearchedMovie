@@ -20,11 +20,11 @@ class MovieFavoriteViewModel: ViewModelType {
     }
     
     struct Output {
-        let favoritesRelay: ReplayRelay<[Movie]>
-        let favoriteDriver: Driver<Int>
+        let favoriteDriver: Driver<[Movie]>
+        let favoriteCountDriver: Driver<Int>
     }
     
-    private let favoritesRelay = ReplayRelay<[Movie]>.create(bufferSize: 1)
+    private let favoritesSubject = ReplaySubject<[Movie]>.create(bufferSize: 1)
     private let favoriteCountSubject = ReplaySubject<Int>.create(bufferSize: 1)
     
     func transform(input: Input) -> Output {
@@ -38,8 +38,8 @@ class MovieFavoriteViewModel: ViewModelType {
         request()
         
         return Output(
-            favoritesRelay: favoritesRelay,
-            favoriteDriver: favoriteCountSubject.asDriver(onErrorJustReturn: 0)
+            favoriteDriver: favoritesSubject.asDriver(onErrorJustReturn: []),
+            favoriteCountDriver: favoriteCountSubject.asDriver(onErrorJustReturn: 0)
         )
     }
     
@@ -53,7 +53,7 @@ class MovieFavoriteViewModel: ViewModelType {
             }
         
         favoriteCountSubject.onNext(movieResult.count)
-        favoritesRelay.accept(movieResult)
+        favoritesSubject.onNext(movieResult)
     }
     
     func isFavoriate(movie: Movie) -> Bool {

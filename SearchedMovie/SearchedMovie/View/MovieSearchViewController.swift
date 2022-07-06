@@ -82,34 +82,33 @@ class MovieSearchViewController: BasicViewController {
                 searchedTextRelay: self.searchedTextRelay,
                 favoriateSelectedItemRelay: self.favoriateSelectedItemRelay))
         
-        bindTableView(vmOutput.moviesRelay)
+        bindTableView(vmOutput.moviesDriver)
     }
     
-    private func bindTableView(_ moviesRelay: BehaviorRelay<[Movie]>) {
-        moviesRelay
-            .bind(to: movieTableView.rx
-                .items(
-                    cellIdentifier: MovieCell.id,
-                    cellType: MovieCell.self
-                )) { [weak self] index, movie, cell in
-                    guard let self = self else { return }
-                    
-                    let isFavoriate = self.viewModel.isFavoriate(movie: movie)
-                    
-                    cell.configure(
-                        imageURL: movie.imageURL?.toURL(),
-                        isFavorite: isFavoriate,
-                        title: movie.title ?? String.empty,
-                        director: movie.director ?? String.empty,
-                        actor: movie.actors ?? String.empty,
-                        userRating: movie.userRating ?? String.empty
-                    )
-                    
-                    cell.didTapStarButton { [weak self] in
-                        self?.favoriateSelectedItemRelay.accept(movie)
-                    }
+    private func bindTableView(_ moviesDriver: Driver<[Movie]>) {
+        moviesDriver
+            .drive(movieTableView.rx.items(
+                cellIdentifier: MovieCell.id,
+                cellType: MovieCell.self)
+            ) { [weak self] index, movie, cell in
+                guard let self = self else { return }
+                
+                let isFavoriate = self.viewModel.isFavoriate(movie: movie)
+                
+                cell.configure(
+                    imageURL: movie.imageURL?.toURL(),
+                    isFavorite: isFavoriate,
+                    title: movie.title ?? String.empty,
+                    director: movie.director ?? String.empty,
+                    actor: movie.actors ?? String.empty,
+                    userRating: movie.userRating ?? String.empty
+                )
+                
+                cell.didTapStarButton { [weak self] in
+                    self?.favoriateSelectedItemRelay.accept(movie)
                 }
-                .disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: - subscribe

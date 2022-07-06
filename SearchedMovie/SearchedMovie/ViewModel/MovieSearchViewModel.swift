@@ -19,7 +19,7 @@ class MovieSearchViewModel: ViewModelType  {
     }
     
     struct Output {
-        let moviesRelay: BehaviorRelay<[Movie]>
+        let moviesDriver: Driver<[Movie]>
     }
     
     private let moviesRelay = BehaviorRelay(value: [Movie]())
@@ -40,7 +40,7 @@ class MovieSearchViewModel: ViewModelType  {
             }
             .disposed(by: disposeBag)
         
-        return Output(moviesRelay: moviesRelay)
+        return Output(moviesDriver: moviesRelay.asDriver())
     }
     
     // MARK: - Action

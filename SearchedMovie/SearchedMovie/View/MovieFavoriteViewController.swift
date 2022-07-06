@@ -63,7 +63,7 @@ class MovieFavoriteViewController: BasicViewController {
         super.bind()
         let vmOutput = viewModel.transform(input: .init(selectedItemRelay: selectedItemRelay))
         
-        vmOutput.favoriteDriver
+        vmOutput.favoriteCountDriver
             .drive(with: self
             ) { owner, count in
                 
@@ -73,12 +73,11 @@ class MovieFavoriteViewController: BasicViewController {
             }
             .disposed(by: disposeBag)
         
-        vmOutput.favoritesRelay
-            .bind(to: movieTableView.rx
-            .items(
+        vmOutput.favoriteDriver
+            .drive(movieTableView.rx.items(
                 cellIdentifier: MovieCell.id,
-                cellType: MovieCell.self
-            )) { [weak self] index, movie, cell in
+                cellType: MovieCell.self)
+            ) { [weak self] index, movie, cell in
                 guard let self = self else { return }
                 
                 cell.configure(
@@ -89,7 +88,7 @@ class MovieFavoriteViewController: BasicViewController {
                     actor: movie.actors ?? String.empty,
                     userRating: movie.userRating ?? String.empty
                 )
-
+                
                 cell.didTapStarButton { [weak self] in
                     self?.selectedItemRelay.accept(movie)
                 }
